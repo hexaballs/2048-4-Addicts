@@ -8,3 +8,21 @@ body {
   width: 25%;
   height: 114px;
 }
+
+@media (min-width: 768px) {
+  .cell {
+    height: 180px;
+  }
+}
+
+@media (min-width: 992px) {
+  .cell {
+    height: 114px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cell {
+    height: 139px;
+  }
+}
