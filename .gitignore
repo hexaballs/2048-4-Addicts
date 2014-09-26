@@ -1,3 +1,7 @@
+*.js
+*.map
+.DS-Store
+
 # Logs
 logs
 *.log
