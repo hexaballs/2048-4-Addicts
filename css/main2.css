@@ -1,5 +1,16 @@
-body {
+@font-face {
+  font-family: "Clear Sans";
+  src: url("/fonts/ClearSans-Bold.ttf");
+}
 
+body {
+  background: #faf8ef;
+  font-family: "Clear Sans";
+  color: #776e65;
+}
+
+h1 {
+  font-size: 40px;
 }
 
 .cell {
@@ -7,9 +18,10 @@ body {
   border: 1px solid black;
   width: 25%;
   height: 114px;
+  background: rgba(238, 228, 218, 0.35);
 }
 
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
   .cell {
     height: 180px;
   }
@@ -25,4 +37,4 @@ body {
   .cell {
     height: 139px;
   }
-}
+}*/
