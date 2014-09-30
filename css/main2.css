@@ -13,12 +13,33 @@ h1 {
   font-size: 40px;
 }
 
+.row {
+    text-align: center;
+}
+
 .cell {
   float: left;
-  border: 1px solid black;
-  width: 25%;
-  height: 114px;
+  border-radius: 3px;
+  width: 100px;
+  height: 100px;
   background: rgba(238, 228, 218, 0.35);
+  position: relative;
+  margin: 7.5px;
+  font-size: 2em;
+}
+
+.cell div {
+  margin-top: 26px;
+}
+
+.board {
+  background: #bbada0;
+  width: 475px;
+  height: 475px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 6px;
+  padding: 7.5px;
 }
 
 /*@media (min-width: 768px) {
