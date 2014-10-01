@@ -1,3 +1,12 @@
+randomInt = (x) ->
+  Math.floor(Math.random() * x)
+
+randomCellIndices = ->
+  [randomInt(4), randomInt(4)]
+  # row = randomInt(4)
+  # col = randomInt(4)
+  # cellIndices = [row, col]
+
 buildBoard = ->
   [0..3].map (-> [0..3].map (-> 0))
 
@@ -11,7 +20,7 @@ buildBoard = ->
 
 generateTile = ->
   value = 2
-
+  console.log "randomInt: #{randomCellIndices()}"
   console.log "generate tile"
 
 printArray = (array) ->
