@@ -1,17 +1,17 @@
 buildBoard = ->
-  board = []
-  for row in [0..3]
-    # console.log "i1: ", i1
-    # row = []
-    board[row] = []
-    for column in [0..3]
-      board[row][column] = 0
-      # console.log "i2: ", i2
-  # console.log "board: ", board
-  console.log "build board"
-  board
+  [0..3].map (-> [0..3].map (-> 0))
+
+# can also be written as:
+  # board = []
+  # for row in [0..3]
+  #   board[row] = []
+  #   for column in [0..3]
+  #     board[row][column] = 0
+  # board
 
 generateTile = ->
+  value = 2
+
   console.log "generate tile"
 
 printArray = (array) ->
@@ -20,9 +20,8 @@ printArray = (array) ->
     console.log row
   console.log "-- End --"
 
-
 $ ->
-  board = buildBoard()
-  printArray(board)
+  newBoard = buildBoard()
+  printArray(newBoard)
   generateTile()
   generateTile()

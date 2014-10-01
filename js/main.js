@@ -3,19 +3,16 @@
   var buildBoard, generateTile, printArray;
 
   buildBoard = function() {
-    var board, column, row, _i, _j;
-    board = [];
-    for (row = _i = 0; _i <= 3; row = ++_i) {
-      board[row] = [];
-      for (column = _j = 0; _j <= 3; column = ++_j) {
-        board[row][column] = 0;
-      }
-    }
-    console.log("build board");
-    return board;
+    return [0, 1, 2, 3].map((function() {
+      return [0, 1, 2, 3].map((function() {
+        return 0;
+      }));
+    }));
   };
 
   generateTile = function() {
+    var value;
+    value = 2;
     return console.log("generate tile");
   };
 
@@ -30,9 +27,9 @@
   };
 
   $(function() {
-    var board;
-    board = buildBoard();
-    printArray(board);
+    var newBoard;
+    newBoard = buildBoard();
+    printArray(newBoard);
     generateTile();
     return generateTile();
   });
