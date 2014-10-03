@@ -71,7 +71,7 @@ mergeCells = (cells, direction) ->
     for a in [3...0]
       for b in [a-1..0]
         if cells[a] is 0 then break
-        if cells[a] == cells[b]
+        else if cells[a] == cells[b]
           cells[a] *= 2
           cells[b] = 0
           break
@@ -102,17 +102,17 @@ mergeCells = (cells, direction) ->
   #   row.reverse()
   # row
 
-collapseCells = (row, direction) ->
+collapseCells = (cells, direction) ->
   # Remove '0'
-  row = row.filter (x) -> x isnt 0
+  cells = cells.filter (x) -> x isnt 0
   #  Adding '0'
 
-  while row.length < 4
+  while cells.length < 4
     if direction in ['right', 'down']
-      row.unshift 0
+      cells.unshift 0
     else if direction in ['left', 'up']
-      row.push 0
-  row
+      cells.push 0
+  cells
 
 moveIsValid = (originalBoard, newBoard) ->
   for row in [0..3]
@@ -132,10 +132,11 @@ boardIsFull = (board) ->
   true
 
 noValidMoves = (board) ->
-  direction = 'right' # FIXME TO HANDLE OTHER DIRECTION
-  newBoard = move(board, direction)
-  if moveIsValid(board, newBoard)
-    return false
+  directions = ['right', 'left', 'up', 'down']
+  for direction in directions
+    newBoard = move(board, direction)
+    if moveIsValid(board, newBoard)
+      return false
   true
 
 showBoard = (board) ->

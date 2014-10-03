@@ -85,8 +85,7 @@
         for (b = _j = _ref = a - 1; _ref <= 0 ? _j <= 0 : _j >= 0; b = _ref <= 0 ? ++_j : --_j) {
           if (cells[a] === 0) {
             break;
-          }
-          if (cells[a] === cells[b]) {
+          } else if (cells[a] === cells[b]) {
             cells[a] *= 2;
             cells[b] = 0;
             break;
@@ -105,18 +104,18 @@
     return cells;
   };
 
-  collapseCells = function(row, direction) {
-    row = row.filter(function(x) {
+  collapseCells = function(cells, direction) {
+    cells = cells.filter(function(x) {
       return x !== 0;
     });
-    while (row.length < 4) {
+    while (cells.length < 4) {
       if (direction === 'right' || direction === 'down') {
-        row.unshift(0);
+        cells.unshift(0);
       } else if (direction === 'left' || direction === 'up') {
-        row.push(0);
+        cells.push(0);
       }
     }
-    return row;
+    return cells;
   };
 
   moveIsValid = function(originalBoard, newBoard) {
@@ -147,11 +146,14 @@
   };
 
   noValidMoves = function(board) {
-    var direction, newBoard;
-    direction = 'right';
-    newBoard = move(board, direction);
-    if (moveIsValid(board, newBoard)) {
-      return false;
+    var direction, directions, newBoard, _i, _len;
+    directions = ['right', 'left', 'up', 'down'];
+    for (_i = 0, _len = directions.length; _i < _len; _i++) {
+      direction = directions[_i];
+      newBoard = move(board, direction);
+      if (moveIsValid(board, newBoard)) {
+        return false;
+      }
     }
     return true;
   };
