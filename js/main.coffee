@@ -38,52 +38,79 @@ generateTile = (board) ->
 move = (board, direction) ->
   newBoard = buildBoard()
   for i in [0..3]
-    if direction is 'right' or 'left'
+    if direction in ['right', 'left']
       row = getRow(i, board)
       row = mergeCells(row, direction)
       row = collapseCells(row, direction)
       setRow(row, i, newBoard)
+
+    else if direction in ['down', 'up']
+      col = getCol(i, board)
+      col = mergeCells(col, direction)
+      col = collapseCells(col, direction)
+      setCol(col, i, newBoard)
 
   newBoard
 
 getRow = (r, board) ->
   [board[r][0], board[r][1], board[r][2], board[r][3]]
 
+getCol = (c, board) ->
+  [board[0][c], board[1][c], board[2][c], board[3][c]]
+
 setRow = (row, index, board) ->
   board[index] = row
 
-mergeCells = (row, direction) ->
+setCol = (col, index, board) ->
+  for i in [0..3]
+    board[i][index] = col[i]
 
-  if direction == 'right'
+mergeCells = (cells, direction) ->
+
+  merge = (cells) ->
     for a in [3...0]
       for b in [a-1..0]
-        if row[a] is 0 then break
-        else if row[a] == row[b]
-          row[a] *= 2 #cabwa row[a] = row[a] * 2
-          row[b] = 0
+        if cells[a] is 0 then break
+        if cells[a] == cells[b]
+          cells[a] *= 2
+          cells[b] = 0
           break
-        else if row[b] isnt 0 then break
-  else if direction == 'left'
-    for a in [0...3]
-      for b in [a+1..3]
-        if row[a] is 0 then break
-        else if row[a] == row[b]
-          row[a] *= 2
-          row[b] = 0
-          break
-        else if row[b] isnt 0 then break
-  row
+        else if cells[b] isnt 0 then break
+    cells
 
+  if direction in ['right', 'down']
+    cells = merge(cells)
+  else if direction in ['left', 'up']
+    cells = merge(cells.reverse()).reverse()
+
+  cells
+
+  # cabwa if direction == 'left'
+  #   row = row.reverse()
+
+  # if direction == 'right' or 'left'
+  #   for a in [3...0]
+  #     for b in [a-1..0]
+  #       if row[a] is 0 then break
+  #       else if row[a] == row[b]
+  #         row[a] *= 2 #cabwa row[a] = row[a] * 2
+  #         row[b] = 0
+  #         break
+  #       else if row[b] isnt 0 then break
+
+  # if direction is 'left'
+  #   row.reverse()
+  # row
 
 collapseCells = (row, direction) ->
   # Remove '0'
   row = row.filter (x) -> x isnt 0
   #  Adding '0'
-  if direction is 'right'
-    while row.length < 4
+
+  while row.length < 4
+    if direction in ['right', 'down']
       row.unshift 0
-  else if direction is 'left'
-    while row.length < 4
+    else if direction in ['left', 'up']
       row.push 0
   row
 
@@ -114,7 +141,10 @@ noValidMoves = (board) ->
 showBoard = (board) ->
   for row in [0..3]
     for col in [0..3]
-      $(".r#{row}.c#{col} > div").html(board[row][col])
+      if board[row][col] == 0
+        $(".r#{row}.c#{col} > div").html(" ")
+      else
+        $(".r#{row}.c#{col} > div").html(board[row][col])
   # console.log "show board"
 
 printArray = (array) ->
