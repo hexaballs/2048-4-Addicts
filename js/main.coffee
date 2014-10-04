@@ -144,9 +144,20 @@ showBoard = (board) ->
     for col in [0..3]
       if board[row][col] == 0
         $(".r#{row}.c#{col} > div").html(" ")
+        $(".r#{row}.c#{col}").removeClass('value-2').removeClass('value-4').removeClass('value-8').removeClass('value-16').removeClass('value-32').removeClass('value-64').removeClass('value-128').removeClass('value-256').removeClass('value-512').removeClass('value-1024').removeClass('value-2048').addClass('value-' + 0)
       else
         $(".r#{row}.c#{col} > div").html(board[row][col])
-  # console.log "show board"
+        $(".r#{row}.c#{col}").removeClass('value-2').removeClass('value-4').removeClass('value-8').removeClass('value-16').removeClass('value-32').removeClass('value-64').removeClass('value-128').removeClass('value-256').removeClass('value-512').removeClass('value-1024').removeClass('value-2048').addClass('value-' + board[row][col])
+        # if board[row][col] is 2
+        #   $(".r#{row}.c#{col}").css('background', '#eee4da')
+        # else if board[row][col] is 4
+        #   $(".r#{row}.c#{col}").css('background', '#faf8ef')
+        # else if board[row][col] is 8
+        #   $(".r#{row}.c#{col}").css('background', '#f2b179')
+        # else if board[row][col] is 16
+        #   $(".r#{row}.c#{col}").css('background', '#f59563')
+
+
 
 printArray = (array) ->
   console.log "-- Start --"

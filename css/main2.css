@@ -29,7 +29,12 @@ h1 {
 }
 
 .cell div {
-  margin-top: 26px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
 .board {
@@ -40,6 +45,64 @@ h1 {
   margin-left: auto;
   border-radius: 6px;
   padding: 7.5px;
+}
+
+
+.value-0 {
+  background: rgba(238, 228, 218, 0.35);
+}
+
+.value-2 {
+  background: #eee4da;
+}
+
+.value-4 {
+  background: #faf8ef;
+}
+
+.value-8 {
+  color: #f9f6f2;
+  background: #f2b179;
+}
+
+.value-16 {
+  color: #f9f6f2;
+  background: #f59563;
+}
+
+.value-32 {
+  color: #f9f6f2;
+  background: #f67c5f;
+}
+
+.value-64 {
+  color: #f9f6f2;
+  background: #f65e3b;
+}
+
+.value-128 {
+  color: #f9f6f2;
+  background: #edcf72;
+}
+
+.value-256 {
+  color: #f9f6f2;
+  background: #edcc61;
+}
+
+.value-512 {
+  color: #f9f6f2;
+  background: #edc850;
+}
+
+.value-1024 {
+  color: #f9f6f2;
+  background: #edc53f;
+}
+
+.value-2048 {
+  color: #f9f6f2;
+  background: #edc22e;
 }
 
 /*@media (min-width: 768px) {

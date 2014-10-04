@@ -167,9 +167,11 @@
         _results1 = [];
         for (col = _j = 0; _j <= 3; col = ++_j) {
           if (board[row][col] === 0) {
-            _results1.push($(".r" + row + ".c" + col + " > div").html(" "));
+            $(".r" + row + ".c" + col + " > div").html(" ");
+            _results1.push($(".r" + row + ".c" + col).removeClass('value-2').removeClass('value-4').removeClass('value-8').removeClass('value-16').removeClass('value-32').removeClass('value-64').removeClass('value-128').removeClass('value-256').removeClass('value-512').removeClass('value-1024').removeClass('value-2048').addClass('value-' + 0));
           } else {
-            _results1.push($(".r" + row + ".c" + col + " > div").html(board[row][col]));
+            $(".r" + row + ".c" + col + " > div").html(board[row][col]);
+            _results1.push($(".r" + row + ".c" + col).removeClass('value-2').removeClass('value-4').removeClass('value-8').removeClass('value-16').removeClass('value-32').removeClass('value-64').removeClass('value-128').removeClass('value-256').removeClass('value-512').removeClass('value-1024').removeClass('value-2048').addClass('value-' + board[row][col]));
           }
         }
         return _results1;
