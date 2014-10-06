@@ -142,12 +142,13 @@ noValidMoves = (board) ->
 showBoard = (board) ->
   for row in [0..3]
     for col in [0..3]
+      for power in [1..11]
+        $(".r#{row}.c#{col}").removeClass('value-' + Math.pow(2, power))
       if board[row][col] == 0
         $(".r#{row}.c#{col} > div").html(" ")
-        $(".r#{row}.c#{col}").removeClass('value-2').removeClass('value-4').removeClass('value-8').removeClass('value-16').removeClass('value-32').removeClass('value-64').removeClass('value-128').removeClass('value-256').removeClass('value-512').removeClass('value-1024').removeClass('value-2048').addClass('value-' + 0)
       else
         $(".r#{row}.c#{col} > div").html(board[row][col])
-        $(".r#{row}.c#{col}").removeClass('value-2').removeClass('value-4').removeClass('value-8').removeClass('value-16').removeClass('value-32').removeClass('value-64').removeClass('value-128').removeClass('value-256').removeClass('value-512').removeClass('value-1024').removeClass('value-2048').addClass('value-' + board[row][col])
+        $(".r#{row}.c#{col}").addClass('value-' + board[row][col])
         # if board[row][col] is 2
         #   $(".r#{row}.c#{col}").css('background', '#eee4da')
         # else if board[row][col] is 4
@@ -157,20 +158,51 @@ showBoard = (board) ->
         # else if board[row][col] is 16
         #   $(".r#{row}.c#{col}").css('background', '#f59563')
 
-
-
 printArray = (array) ->
   console.log "-- Start --"
   for row in array
     console.log row
   console.log "-- End --"
 
+
 $ ->
+  $('.board').hide()
+  $('.board').fadeIn(1000)
   @board = buildBoard()
   generateTile(@board)
   generateTile(@board)
   # printArray(@board)
   showBoard(@board)
+
+  gameStarted = false
+  timePlayedSec = 13
+  timePlayedMin = 0
+
+
+  $('.newGame').click =>
+    document.location.reload()
+
+  setInterval( =>
+    if (timePlayedSec is 0) && (timePlayedMin is 0)
+      $('.timer').addClass('stopPlaying').html('STOP!')
+      $('h1 p > span').addClass('addicts').html('ADDICT!')
+    else if (timePlayedSec is 11) && (timePlayedMin is 0)
+      $('.board').addClass('stopPlayingBoard').fadeOut(800).fadeIn(800).fadeOut(700).fadeIn(700).fadeOut(600).fadeIn(600).fadeOut(500).fadeIn(500).fadeOut(400).fadeIn(400).fadeOut(350).fadeIn(350).fadeOut(300).fadeIn(300).fadeOut(250).fadeIn(250).fadeOut(200).fadeIn(200).fadeOut(150).fadeIn(150).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(50).fadeOut()
+      timePlayedSec -= 1
+      if timePlayedSec is -1
+        timePlayedSec = 59
+        timePlayedMin -= 1
+      $('.timer > p').html("#{timePlayedMin}:#{timePlayedSec}")
+      $('.newGame').click =>
+        alert('Don\'t even think about it!')
+    else if gameStarted
+      timePlayedSec -= 1
+      if timePlayedSec is -1
+        timePlayedSec = 59
+        timePlayedMin -= 1
+      $('.timer > p').html("#{timePlayedMin}:#{timePlayedSec}")
+  ,
+  1000)
 
   $('body').keydown (e) =>
 
@@ -178,6 +210,7 @@ $ ->
     keys = [37..40]
 
     if key in keys   # cabwa keys.indexOf(key) > -1
+      gameStarted = true
       e.preventDefault()
       # continue the game
       direction = switch key
@@ -206,9 +239,6 @@ $ ->
       else
         console.log "invalid"
 
-
-    else
-      # do nothing
 
 
 

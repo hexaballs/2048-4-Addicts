@@ -159,19 +159,21 @@
   };
 
   showBoard = function(board) {
-    var col, row, _i, _results;
+    var col, power, row, _i, _results;
     _results = [];
     for (row = _i = 0; _i <= 3; row = ++_i) {
       _results.push((function() {
-        var _j, _results1;
+        var _j, _k, _results1;
         _results1 = [];
         for (col = _j = 0; _j <= 3; col = ++_j) {
+          for (power = _k = 1; _k <= 11; power = ++_k) {
+            $(".r" + row + ".c" + col).removeClass('value-' + Math.pow(2, power));
+          }
           if (board[row][col] === 0) {
-            $(".r" + row + ".c" + col + " > div").html(" ");
-            _results1.push($(".r" + row + ".c" + col).removeClass('value-2').removeClass('value-4').removeClass('value-8').removeClass('value-16').removeClass('value-32').removeClass('value-64').removeClass('value-128').removeClass('value-256').removeClass('value-512').removeClass('value-1024').removeClass('value-2048').addClass('value-' + 0));
+            _results1.push($(".r" + row + ".c" + col + " > div").html(" "));
           } else {
             $(".r" + row + ".c" + col + " > div").html(board[row][col]);
-            _results1.push($(".r" + row + ".c" + col).removeClass('value-2').removeClass('value-4').removeClass('value-8').removeClass('value-16').removeClass('value-32').removeClass('value-64').removeClass('value-128').removeClass('value-256').removeClass('value-512').removeClass('value-1024').removeClass('value-2048').addClass('value-' + board[row][col]));
+            _results1.push($(".r" + row + ".c" + col).addClass('value-' + board[row][col]));
           }
         }
         return _results1;
@@ -191,16 +193,54 @@
   };
 
   $(function() {
+    var gameStarted, timePlayedMin, timePlayedSec;
+    $('.board').hide();
+    $('.board').fadeIn(1000);
     this.board = buildBoard();
     generateTile(this.board);
     generateTile(this.board);
     showBoard(this.board);
+    gameStarted = false;
+    timePlayedSec = 13;
+    timePlayedMin = 0;
+    $('.newGame').click((function(_this) {
+      return function() {
+        return document.location.reload();
+      };
+    })(this));
+    setInterval((function(_this) {
+      return function() {
+        if ((timePlayedSec === 0) && (timePlayedMin === 0)) {
+          $('.timer').addClass('stopPlaying').html('STOP!');
+          return $('h1 p > span').addClass('addicts').html('ADDICT!');
+        } else if ((timePlayedSec === 11) && (timePlayedMin === 0)) {
+          $('.board').addClass('stopPlayingBoard').fadeOut(800).fadeIn(800).fadeOut(700).fadeIn(700).fadeOut(600).fadeIn(600).fadeOut(500).fadeIn(500).fadeOut(400).fadeIn(400).fadeOut(350).fadeIn(350).fadeOut(300).fadeIn(300).fadeOut(250).fadeIn(250).fadeOut(200).fadeIn(200).fadeOut(150).fadeIn(150).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(50).fadeOut();
+          timePlayedSec -= 1;
+          if (timePlayedSec === -1) {
+            timePlayedSec = 59;
+            timePlayedMin -= 1;
+          }
+          $('.timer > p').html("" + timePlayedMin + ":" + timePlayedSec);
+          return $('.newGame').click(function() {
+            return alert('Don\'t even think about it!');
+          });
+        } else if (gameStarted) {
+          timePlayedSec -= 1;
+          if (timePlayedSec === -1) {
+            timePlayedSec = 59;
+            timePlayedMin -= 1;
+          }
+          return $('.timer > p').html("" + timePlayedMin + ":" + timePlayedSec);
+        }
+      };
+    })(this), 1000);
     return $('body').keydown((function(_this) {
       return function(e) {
         var direction, key, keys, newBoard;
         key = e.which;
         keys = [37, 38, 39, 40];
         if (__indexOf.call(keys, key) >= 0) {
+          gameStarted = true;
           e.preventDefault();
           direction = (function() {
             switch (key) {
@@ -230,8 +270,6 @@
           } else {
             return console.log("invalid");
           }
-        } else {
-
         }
       };
     })(this));

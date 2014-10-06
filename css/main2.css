@@ -10,7 +10,63 @@ body {
 }
 
 h1 {
-  font-size: 40px;
+  height: 200px;
+  width: 475px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 30px;
+}
+
+h1 p {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.newGame {
+  float: left;
+  background-color:#2e466e;
+  border-radius:10px;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:arial;
+  font-size:25px;
+  padding:12px 34px;
+  height: 75px;
+  margin-top: 5px;
+}
+
+h1 div {
+  float: right;
+  border: 1px solid;
+  margin: 5px;
+  margin-top: 13px;
+  border-radius: 10px;
+  background: #bbada0;
+  font-family: arial;
+  font-weight: bold;
+  height: 60px;
+  padding-top: 5px;
+}
+
+.timer p {
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.timer {
+  width: 150px;
+  font-size: 20px;
+
+}
+.score p {
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.score {
+  width: 80px;
 }
 
 .row {
@@ -38,13 +94,14 @@ h1 {
 }
 
 .board {
-  background: #bbada0;
+  background: #2e466e;
   width: 475px;
   height: 475px;
   margin-right: auto;
   margin-left: auto;
   border-radius: 6px;
   padding: 7.5px;
+  margin-top: 15px;
 }
 
 
@@ -53,56 +110,74 @@ h1 {
 }
 
 .value-2 {
-  background: #eee4da;
+  color: #f9f6f2;
+  background: #ffb300;
 }
 
 .value-4 {
-  background: #faf8ef;
+  color: #f9f6f2;
+  background: #f07610;
 }
 
 .value-8 {
   color: #f9f6f2;
-  background: #f2b179;
+  background: #87b829;
 }
 
 .value-16 {
   color: #f9f6f2;
-  background: #f59563;
+  background: #176ced;
 }
 
 .value-32 {
   color: #f9f6f2;
-  background: #f67c5f;
+  background: #009755;
 }
 
 .value-64 {
   color: #f9f6f2;
-  background: #f65e3b;
+  background: #ab407c;
 }
 
 .value-128 {
   color: #f9f6f2;
-  background: #edcf72;
+  background: #332a98;
 }
 
 .value-256 {
   color: #f9f6f2;
-  background: #edcc61;
+  background: #447294;
 }
 
 .value-512 {
   color: #f9f6f2;
-  background: #edc850;
+  background: #0063b0;
 }
 
 .value-1024 {
   color: #f9f6f2;
-  background: #edc53f;
+  background: #fdb41e;
 }
 
 .value-2048 {
   color: #f9f6f2;
-  background: #edc22e;
+  background: #ea361f;
+}
+
+.addicts {
+  color: #911107;
+  font-size: 58px;
+}
+
+.stopPlaying {
+  background: #911107;
+  padding-top: 13px;
+  font-size: 30px;
+  color: white;
+}
+
+.stopPlayingBoard {
+  background: #911107;
 }
 
 /*@media (min-width: 768px) {
