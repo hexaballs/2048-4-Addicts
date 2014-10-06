@@ -164,6 +164,12 @@ printArray = (array) ->
     console.log row
   console.log "-- End --"
 
+score = (board) ->
+  counter = 0
+  for row in board
+    for col in row
+      counter += col
+  counter
 
 $ ->
   $('.board').hide()
@@ -175,17 +181,26 @@ $ ->
   showBoard(@board)
 
   gameStarted = false
-  timePlayedSec = 13
+  timePlayedSec = 12
   timePlayedMin = 0
 
 
   $('.newGame').click =>
-    document.location.reload()
+    $('.board').hide()
+    $('.board').fadeIn(1000)
+    @board = buildBoard()
+    generateTile(@board)
+    generateTile(@board)
+    showBoard(@board)
 
   setInterval( =>
-    if (timePlayedSec is 0) && (timePlayedMin is 0)
+    if (timePlayedSec is 1) && (timePlayedMin is 0)
       $('.timer').addClass('stopPlaying').html('STOP!')
       $('h1 p > span').addClass('addicts').html('ADDICT!')
+      $('.board').fadeIn().addClass('stopPlayingBoard2').html('Go back to coding!!!')
+      $('.newGame').click =>
+        alert('Don\'t even think about it!')
+
     else if (timePlayedSec is 11) && (timePlayedMin is 0)
       $('.board').addClass('stopPlayingBoard').fadeOut(800).fadeIn(800).fadeOut(700).fadeIn(700).fadeOut(600).fadeIn(600).fadeOut(500).fadeIn(500).fadeOut(400).fadeIn(400).fadeOut(350).fadeIn(350).fadeOut(300).fadeIn(300).fadeOut(250).fadeIn(250).fadeOut(200).fadeIn(200).fadeOut(150).fadeIn(150).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(50).fadeOut()
       timePlayedSec -= 1
@@ -193,8 +208,7 @@ $ ->
         timePlayedSec = 59
         timePlayedMin -= 1
       $('.timer > p').html("#{timePlayedMin}:#{timePlayedSec}")
-      $('.newGame').click =>
-        alert('Don\'t even think about it!')
+
     else if gameStarted
       timePlayedSec -= 1
       if timePlayedSec is -1
@@ -227,13 +241,14 @@ $ ->
       if moveIsValid(@board, newBoard)
         console.log "valid"
         @board = newBoard
+        $('.score > p').html(score(@board))
         # generate tile
         generateTile(@board)
         # show board
         showBoard(@board)
         # check game lost
         if isGameOver(@board)
-          console.log "You LOSE!"
+          alert("You LOSE!")
         else
 
       else
